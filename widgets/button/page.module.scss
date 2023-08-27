@@ -1,0 +1,12 @@
+.button {
+    padding: .6rem 1.2rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #00f;
+
+    &:active {
+        background-color: rgb(62, 62, 255);
+    }
+}

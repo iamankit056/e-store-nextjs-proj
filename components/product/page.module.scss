@@ -1,0 +1,51 @@
+.product {
+    padding: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    &:hover {
+        padding: .5rem;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    div {     
+        padding: .5rem 1rem;  
+
+        h1 {
+            margin-bottom: .5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .newPrice {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .oldPrice {
+            margin: 0 .25rem;
+            margin-right: .5rem;
+            font-size: .8rem;
+            color: #666;
+            text-decoration: line-through;
+        }
+        
+        .discount{
+            margin: .5rem 0;
+            padding: .5rem 1rem;
+            color: #fff;
+            display: inline-block;
+            background-color: rgb(255, 89, 0);
+        }
+
+        .message {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgb(151, 0, 53);
+            display: block;
+        }
+    }
+}

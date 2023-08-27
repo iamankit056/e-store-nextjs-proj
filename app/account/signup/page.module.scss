@@ -1,0 +1,18 @@
+.container {
+    margin-top: 2rem;
+
+    h1 {
+        margin-bottom: 1rem;
+    }
+
+    form {
+        margin-bottom: 1rem;
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: auto auto;
+            column-gap: .5rem;
+        }
+    }
+    
+}
