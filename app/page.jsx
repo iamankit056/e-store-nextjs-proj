@@ -16,7 +16,7 @@ export default function Home() {
     //     if(productsStatus == 'idel') {
     //         dispatch(fetchProducts());
     //     }
-    // }, []);
+    // }, [productsStatus, dispatch]);
 
 
     // let content;
@@ -26,7 +26,7 @@ export default function Home() {
     //     content = products.map(product => <Product key={product.id} /> )
     // }
     // else if(productsStatus == 'failed') {
-    //     content = <p>{error}</p>
+    //     content = <p>Error: {error}</p>
     // }
 
     // return content;

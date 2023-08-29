@@ -1,3 +1,4 @@
+'use client';
 import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -15,15 +16,17 @@ export const fetchProducts = createAsyncThunk(
         try {
             const config = {
                 Header: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMzEzMDg4LCJpYXQiOjE2OTMzMDU4ODgsImp0aSI6ImUyYmQwNmNmNWMwNDQxZWNiMjJjNWVhZTgzMDM2ZmE5IiwidXNlcl9pZCI6MX0.6jbh0NfCw7XwlNjoktjXdCyflwaPkFrIaZV9Vt14rHg'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMzIwNzEwLCJpYXQiOjE2OTMzMTM1MTAsImp0aSI6IjZkMGZkNGNiNGNiZjQ0YzU4NTcwZmUzYzk5MmQyODI2IiwidXNlcl9pZCI6MX0.ij-uK3noY3dSspphTbU_xmYNZAjcDJELR4NsyBwexx8'
                 }
             }
-            const { data } = axios.get(API_URL, config);
-            console.log(data);
-            return data;
+            console.log('fetch...')
+            const response = await axios.get(API_URL, config);
+            console.log(response.data);
+            return response.data;
         }
         catch(err) {
-            return err;
+            console.log(err);
+            return err.message;
         }
     }
 )
