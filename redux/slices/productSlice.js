@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:8000/products/';
 
 const initialState = {
     products: [],
-    status: 'idel', // idel | loading | successed | error
+    status: 'idel', // idel | loading | successed | failed
     error: null
 };
 
@@ -15,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
         try {
             const config = {
                 Header: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMTYzMzA4LCJpYXQiOjE2OTMxNTYxMDgsImp0aSI6Ijg3M2U0YzBiNmUwYjQ0NzU5NTdhZjRiODVlYTIxNTE0IiwidXNlcl9pZCI6MX0.fayTVvpFFfMEJp9FVoDPc08vnIDW8PSvVNVuBd3AHYU'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMzEzMDg4LCJpYXQiOjE2OTMzMDU4ODgsImp0aSI6ImUyYmQwNmNmNWMwNDQxZWNiMjJjNWVhZTgzMDM2ZmE5IiwidXNlcl9pZCI6MX0.6jbh0NfCw7XwlNjoktjXdCyflwaPkFrIaZV9Vt14rHg'
                 }
             }
             const { data } = axios.get(API_URL, config);
@@ -29,10 +29,10 @@ export const fetchProducts = createAsyncThunk(
 )
 
 const productSlice = createSlice({
-    name: 'product',
+    name: 'products',
     initialState,
     reducers: {
-        
+
     },
     extraReducers: {
         [fetchProducts.pending]: state => state.status = 'loading',
@@ -40,11 +40,16 @@ const productSlice = createSlice({
             state.status = 'successed';
             state.products = action.payload;
         },
-        [fetchProducts.rejected]: state => {
-            state.status = 'error';
+        [fetchProducts.rejected]: (state, action) => {
+            state.status = 'failed';
+            state.error = action.payload;
         },
     }
 })
+
+export const getProducts = (state) => state.products.products;
+export const getProductsStatus = (state) => state.products.status;
+export const getProductsError = (state) => state.products.error;
 
 export const {} = productSlice.actions;
 export default productSlice.reducer;
