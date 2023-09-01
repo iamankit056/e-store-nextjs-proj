@@ -2,7 +2,7 @@
 import { createSlice, configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/products/';
+const API_URL = 'http://localhost:8000/products';
 
 const initialState = {
     products: [],
@@ -12,21 +12,21 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
     'fetch/products',
-    async () => {
+    async ({rejectWithValue}) => {
         try {
             const config = {
                 Header: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMzIwNzEwLCJpYXQiOjE2OTMzMTM1MTAsImp0aSI6IjZkMGZkNGNiNGNiZjQ0YzU4NTcwZmUzYzk5MmQyODI2IiwidXNlcl9pZCI6MX0.ij-uK3noY3dSspphTbU_xmYNZAjcDJELR4NsyBwexx8'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkzMzk2MzgyLCJpYXQiOjE2OTMzODkxODIsImp0aSI6IjU0Y2E3ZWJkZjJlNzRhMmU5NjQxMTU2ZTBiMThiZWFiIiwidXNlcl9pZCI6MX0.75GxJ827yAc8HFLGaSQI0HW_2vSMhCXpnS5LBUW5ZdM'
                 }
-            }
+            }   
             console.log('fetch...')
             const response = await axios.get(API_URL, config);
             console.log(response.data);
             return response.data;
         }
-        catch(err) {
-            console.log(err);
-            return err.message;
+        catch(error) {
+            console.log(error);
+            return rejectWithValue(error.response.data);
         }
     }
 )
@@ -37,16 +37,19 @@ const productSlice = createSlice({
     reducers: {
 
     },
-    extraReducers: {
-        [fetchProducts.pending]: state => state.status = 'loading',
-        [fetchProducts.fulfilled]: (state, action) => {
-            state.status = 'successed';
-            state.products = action.payload;
-        },
-        [fetchProducts.rejected]: (state, action) => {
-            state.status = 'failed';
-            state.error = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchProducts.pending, (state, action) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchProducts.fulfilled, (state, action) => {
+                state.status = 'successed';
+                state.products = action.payload;
+            })
+            .addCase(fetchProducts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;                
+            })
     }
 })
 
