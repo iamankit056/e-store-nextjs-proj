@@ -1,18 +1,13 @@
+'use client';
 import Image from 'next/image';
 import style from './page.module.scss';
 import { BsFillCartFill } from 'react-icons/bs';
 import { AiFillThunderbolt } from 'react-icons/ai';
 
-function ProductDetails() {
+function ProductDetails({params}) {
     return (
     <div className={style.container}>
         <div className={style.images}>
-            <div>
-                <Image src={'/redmi a2.jpg'} width={50} height={50} alt='' />
-                <Image src={'/redmi a2.jpg'} width={50} height={50} alt='' />
-                <Image src={'/redmi a2.jpg'} width={50} height={50} alt='' />
-                <Image src={'/redmi a2.jpg'} width={50} height={50} alt='' />
-            </div>
             <Image src={'/redmi a2.jpg'} width={400} height={500} alt='' />
         </div>
         <div className={style.productDetails}>
